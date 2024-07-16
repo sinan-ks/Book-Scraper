@@ -12,12 +12,16 @@ BOT_NAME = "bookscraper"
 SPIDER_MODULES = ["bookscraper.spiders"]
 NEWSPIDER_MODULE = "bookscraper.spiders"
 
+SCRAPEOPS_API_KEY = 'd382eccf-bd10-4583-a615-f7b311ba8c16'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 5
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "bookscraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -44,9 +48,11 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+SPIDER_MIDDLEWARES = {
 #    "bookscraper.middlewares.BookscraperSpiderMiddleware": 543,
-#}
+#    "bookscraper.middlewares.ScrapeOpsFakeUserAgentMiddleware": 400,
+   "bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,  
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -64,7 +70,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "bookscraper.pipelines.BookscraperPipeline": 300,
-   "bookscraper.pipelines.SaveToMySQLPipeline": 400,
+#    "bookscraper.pipelines.SaveToMySQLPipeline": 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
